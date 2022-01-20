@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useCallback, useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import {api} from '../services/api';
 
@@ -40,6 +41,8 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider = ({children}: AuthProviderProps) => {
 
+    const history = useHistory();
+
     const [data, setData] = useState<AuthState>(() => {
         const accessToken = localStorage.getItem('@Hamburgueria:acessToken');
         const user = localStorage.getItem('@Hamburgueria:user');
@@ -60,14 +63,15 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
                 localStorage.setItem('@Hamburgueria:acessToken', response.data.accessToken);
                 localStorage.setItem('@Hamburgueria:user', JSON.stringify(response.data.user));
                 setData(response.data);
+                history.push('/dashboard');
             })
             .catch(err => console.log(err))
     }, []);
 
     const registerUser = useCallback(({name, email, password}: RegisterCredentials) => {
         api.post<AuthState>('/users', {name, email, password})
-            .then(_=>_)
-            .catch(err => console.log(err));
+            .then(_=> history.push('/'))
+            .catch(err =>  console.log(err));
     }, [])
 
 
