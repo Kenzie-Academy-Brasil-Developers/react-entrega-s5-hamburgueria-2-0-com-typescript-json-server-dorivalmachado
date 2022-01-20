@@ -48,7 +48,7 @@ export const FormLogin = () => {
                 <Input label="Email" error={errors.email} placeholder="Email" {...register('email')}/>
                 <Input label="Senha" error={errors.password} type='password' placeholder="Senha" {...register('password')}/>
                 <Button type='submit' name="Logar" isGreen/>
-                <Text fontSize='14px' textAlign='center' color='grey.200' w={['250px', '250px', '325px']}>Crie sua conta para saborear muitas delícias e matar sua fome!</Text>
+                <Text fontSize='14px' textAlign='center' color='grey.400' w={['250px', '250px', '325px']}>Crie sua conta para saborear muitas delícias e matar sua fome!</Text>
                 <Button onClick={() => history.push('/register')} name="Cadastrar"/>
             </VStack>
 

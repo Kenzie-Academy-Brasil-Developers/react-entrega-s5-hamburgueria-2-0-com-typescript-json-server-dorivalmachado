@@ -71,7 +71,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({labe
                         m='0'
                         p='0 3px'
                         fontSize='12px'
-                        color='grey.200'
+                        color='grey.400'
                     >
                         {label}
                     </FormLabel>
@@ -89,6 +89,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({labe
                     onChangeCapture={(e) => setInputValue(e.currentTarget.value)}
                     _focus={{borderColor: 'grey.600'}}
                     _hover={{borderColor: 'blue.information'}}
+                    _placeholder={{color: 'grey.400'}}
                     {...rest} 
                 />
                 {!!error && (

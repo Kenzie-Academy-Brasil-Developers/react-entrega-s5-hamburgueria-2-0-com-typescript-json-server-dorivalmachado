@@ -12,12 +12,12 @@ export const Button = ({name, isMedium = false, isGreen = false, ...rest}: Butto
         <ChakraButton 
             h={isMedium ? '40px' : '60px'}
             w={isMedium ? '105px' : '100%'}
-            color={!isGreen ? theme.colors.grey[300] : 'white'}
+            color={!isGreen ? theme.colors.grey[400] : 'white'}
             borderRadius='8px'
             bg={isGreen ? theme.colors.green.primary : theme.colors.grey[100]}
             _hover={isGreen 
                 ? {bgColor: 'green.primary-50'}
-                : {bgColor: 'grey.300', color: theme.colors.grey[100]}
+                : {bgColor: 'grey.400', color: theme.colors.grey[100]}
             }
             {...rest}
         >

@@ -51,7 +51,7 @@ export const FormSignUp = () => {
         >
             <Flex justifyContent='space-between'>
                 <Heading as='h2' fontSize='lg' textAlign='left' mb='30px' color='grey.600' fontWeight='bold'>Cadastro</Heading>
-                <Text color='grey.300' fontSize='14px' textDecoration='underline'>
+                <Text color='grey.400' fontSize='14px' textDecoration='underline'>
                     <Link to='/'>Retornar para o login</Link>
                 </Text>
             </Flex>
