@@ -33,17 +33,27 @@ const CartContext = createContext<CartContextData>({} as CartContextData);
 
 export const CartProvider = ({children}: CartProviderProps) => {
 
-    const [cart, setCart] = useState<ProductCart[]>([])
+    const [cart, setCart] = useState<ProductCart[]>(() => {
+        const cart = localStorage.getItem('@Hamburgueria:cart');
+
+        if(cart){
+            return JSON.parse(cart)
+        }
+        
+        return []
+    })
 
     const addItem = (product: Product) => {
         const selectedItem = cart.find(elem => elem.id === product.id);
 
         if(selectedItem === undefined){
             const newItem = {...product, quantity: 1};
-            setCart([...cart, newItem])
+            setCart([...cart, newItem]);
+            localStorage.setItem('@Hamburgueria:cart', JSON.stringify([...cart, newItem]))
         }else{
             selectedItem.quantity++
             setCart([...cart])
+            localStorage.setItem('@Hamburgueria:cart', JSON.stringify([...cart]))
         }
     }
 

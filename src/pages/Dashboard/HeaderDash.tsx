@@ -16,19 +16,23 @@ import {MdOutlineLogout} from 'react-icons/md'
 
 import logo from '../../assets/logo.svg'
 import { useAuth } from "../../contexts/AuthContext";
+import { useCart } from "../../contexts/CartContext";
+import { useProduct } from "../../contexts/ProductContext";
 import { theme } from "../../styles/theme";
 
 
 
 export const HeaderDash = () => {
 
-    const [items, setItems] = useState(0);
-    // const [items, setItems] = useState(JSON.parse(localStorage.getItem('@Hamburgueria:cart')).products.length || 0);
-    
+    const {cart} = useCart();
+    const {handleFilter} = useProduct();
+    const {signOut} = useAuth();
+
+    const [items, setItems] = useState(cart.length || 0);
     const [showSearch, setShowSearch] = useState(false);
+    const [searchWord, setSearchWord] = useState('');
 
     
-    const {signOut} = useAuth();
 
     const isWideScreen = useBreakpointValue({base: false, md: true});
 
@@ -38,11 +42,27 @@ export const HeaderDash = () => {
         }
     }, [isWideScreen]);
 
+    useEffect(() => {
+        if(cart.length > 0) {
+            setItems(cart.length)
+        }else{
+            setItems(0)
+        }
+
+    }, [cart])
 
     const handleSearch = () => {
-        setShowSearch(false)
+        handleFilter(searchWord);
+        setSearchWord('');
+        setShowSearch(false);
     }
 
+    const handleBlur = () => {
+        setTimeout(() => {
+            setShowSearch(false);
+            setSearchWord('');
+        }, 300)
+    }
     return(
         <Flex h='80px' w='100%' bg='grey.50' justifyContent='center' padding='10px 20px'>
             {showSearch ? (
@@ -51,6 +71,7 @@ export const HeaderDash = () => {
                             w='100%' 
                             h='60px'
                             bg='white'
+                            value={searchWord}
                             color='grey.400'
                             _placeholder={{color: 'grey.100'}}
                             placeholder="Digitar pesquisa"
@@ -58,7 +79,9 @@ export const HeaderDash = () => {
                             border='2px solid'
                             borderColor='grey.100'
                             _focus={{borderColor: 'grey.600'}}
-                            onBlurCapture={() => setShowSearch(false)}
+                            onChange={(e) => setSearchWord(e.target.value)}
+                            onBlurCapture={handleBlur}
+                            // onBlurCapture={() => setShowSearch(false)}
                         />
                         <InputRightElement w='50px' h='40px'  mt='2.5' mr='2.5'>
                             <Button 
@@ -83,12 +106,15 @@ export const HeaderDash = () => {
                                             w='100%' 
                                             h='60px'
                                             bg='white'
+                                            value={searchWord}
                                             color='grey.400'
                                             _placeholder={{color: 'grey.100'}}
                                             placeholder="Digitar pesquisa"
                                             borderRadius='8px'
                                             border='2px solid'
                                             borderColor='grey.100'
+                                            onChange={(e) => setSearchWord(e.target.value)}
+                                            // onChangeCapture={(e) => setSearchWord(e.currentTarget.value)}
                                             _focus={{borderColor: 'grey.600'}}
                                         />
                                         <InputRightElement w='50px' h='40px'  mt='2.5' mr='2.5'>

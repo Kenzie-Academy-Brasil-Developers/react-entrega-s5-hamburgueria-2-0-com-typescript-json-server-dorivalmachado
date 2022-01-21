@@ -54,7 +54,14 @@ export const Card = ({list}: CardProps) => {
                         border='2px solid'
                         borderColor='grey.100'
                         transition='.5s'
-                        _hover={{transform: 'scale(1.05)', borderColor: 'green.primary'}}
+                        _hover={{
+                            transform: 'scale(1.05)', 
+                            borderColor: 'green.primary',
+                            button: {
+                                bg: 'green.primary',
+                                color: 'white'
+                            }
+                        }}
                     >
                         <Center w='100%' h='150px' bg='grey.50'>
                             <Image src={product.imageUrl} alt={product.name} w='170px' />
