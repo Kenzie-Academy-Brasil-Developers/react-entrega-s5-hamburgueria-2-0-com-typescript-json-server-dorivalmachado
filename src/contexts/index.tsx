@@ -12,14 +12,14 @@ interface ProviderProps{
 
 export const Provider = ({children}: ProviderProps) => {
     return(
-        <AuthProvider>
-            <CartProvider>
-                <ProductProvider>
-                    <ChakraProvider theme={theme}>
+        <ChakraProvider theme={theme}>
+            <AuthProvider>
+                <CartProvider>
+                    <ProductProvider>
                         {children}
-                    </ChakraProvider>
-                </ProductProvider>
-            </CartProvider>
-        </AuthProvider>
+                    </ProductProvider>
+                </CartProvider>
+            </AuthProvider>
+        </ChakraProvider>
     )
 }

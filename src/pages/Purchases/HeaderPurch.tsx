@@ -24,7 +24,7 @@ import { useHistory } from "react-router-dom";
 
 
 
-export const HeaderDash = () => {
+export const HeaderPurch = () => {
 
     const {cart, onOpen} = useCart();
     const {handleFilter} = useProduct();
@@ -100,7 +100,7 @@ export const HeaderDash = () => {
                     </InputGroup>
                 ) : (
                     <Flex justifyContent='space-between' alignItems='center' w='100%' maxW='1360px'>
-                        <Image src={logo} alt='Logo Burguer Kenzie' w='159px' h='37px'/>
+                        <Image src={logo} alt='Logo Burguer Kenzie' w='159px' h='37px' cursor='pointer' onClick={() => history.push('/dashboard')}/>
                         <Flex w={['110px', '130px', '465px']} justifyContent='space-between' alignItems='center'>
                             {isWideScreen ? (
                                     <InputGroup w='365px'>
